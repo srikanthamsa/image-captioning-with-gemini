@@ -8,8 +8,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Read the base64-encoded credentials from the encoded_credentials.txt file
-with open("encoded_credentials.txt", "r") as file:
+# Read the base64-encoded credentials from the encoded_credentials.txt file in binary mode
+with open("encoded_credentials.txt", "rb") as file:
     credentials_base64 = file.read().strip()
 
 if not credentials_base64:
