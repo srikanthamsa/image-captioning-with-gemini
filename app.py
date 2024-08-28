@@ -1,16 +1,29 @@
 from google.cloud import vision
 from flask import Flask, request, jsonify, render_template
 import os
+import base64
 from dotenv import load_dotenv
 
 load_dotenv()
 
 app = Flask(__name__)
 
-credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-if not credentials_path:
-    raise EnvironmentError("GOOGLE_APPLICATION_CREDENTIALS environment variable not set")
+# Read the base64-encoded credentials from the encoded_credentials.txt file
+with open("encoded_credentials.txt", "r") as file:
+    credentials_base64 = file.read().strip()
 
+if not credentials_base64:
+    raise EnvironmentError("The encoded_credentials.txt file is empty or not found")
+
+# Decode the base64-encoded credentials and write them to the original JSON file
+credentials_json = base64.b64decode(credentials_base64)
+with open("image-captioning-with-gemini-f5a9a8ab3cfb.json", "wb") as f:
+    f.write(credentials_json)
+
+# Set the environment variable to point to the newly created credentials file
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "image-captioning-with-gemini-f5a9a8ab3cfb.json"
+
+# Initialize the Google Cloud Vision API client
 client = vision.ImageAnnotatorClient()
 
 @app.route('/')
