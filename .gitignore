@@ -1,0 +1,11 @@
+# Ignore environment variables file
+.env
+
+# Optionally, if you want to specifically ignore a file in a certain directory, use a relative path
+image-captioning-with-gemini-f5a9a8ab3cfb.json
+
+
+venv/
+__pycache__/
+*.pyc
+

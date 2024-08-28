@@ -1,0 +1,302 @@
+html,
+body {
+  font-family: "Dongle", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.text-container {
+  z-index: 100; /* Ensure this is on top */
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  opacity: 0.9;
+  user-select: none;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+h1 {
+  margin-bottom: 10px;
+  font-size: 72px; /* Reduced font size for better fit */
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.card {
+  background-color: rgba(34, 34, 34, 0.9);
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 500px;
+  z-index: 100;
+  margin-bottom: 20px;
+  border-radius: 30px;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+}
+
+#tags {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center; /* Center-align tags horizontally */
+  width: 100vw; /* Take up the full width of the screen */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+.tag {
+  background: rgba(0, 0, 0, 0.263);
+  padding: 20px;
+  margin: 5px;
+  border-radius: 30px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+#image-preview-container {
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#image-preview {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+:root {
+  --color-bg1: rgb(0, 0, 0);
+  --color-bg2: rgb(0, 91, 170);
+  --color1: 18, 113, 255;
+  --color2: 221, 74, 255;
+  --color3: 100, 220, 255;
+  --color4: 200, 50, 50;
+  --color5: 180, 180, 50;
+  --circle-size: 50%;
+  --blending: normal;
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+.gradient-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+  background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.gradients-container {
+  filter: blur(15px);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.g1,
+.g2,
+.g3,
+.g4,
+.g5 {
+  position: absolute;
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color1), 0.8) 0,
+      rgba(var(--color1), 0) 50%
+    )
+    no-repeat;
+  width: var(--circle-size);
+  height: var(--circle-size);
+  top: calc(50% - var(--circle-size) / 2);
+  left: calc(50% - var(--circle-size) / 2);
+  transform-origin: center center;
+  animation: moveVertical 30s ease infinite;
+  opacity: 0.6;
+  will-change: transform;
+}
+
+.g2 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color2), 0.8) 0,
+      rgba(var(--color2), 0) 50%
+    )
+    no-repeat;
+  transform-origin: calc(50% - 300px);
+  animation: moveInCircle 20s reverse infinite;
+}
+
+.g3 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color3), 0.8) 0,
+      rgba(var(--color3), 0) 50%
+    )
+    no-repeat;
+  top: calc(50% - var(--circle-size) / 2 + 150px);
+  left: calc(50% - var(--circle-size) / 2 - 400px);
+  transform-origin: calc(50% + 300px);
+  animation: moveInCircle 40s linear infinite;
+}
+
+.g4 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color4), 0.8) 0,
+      rgba(var(--color4), 0) 50%
+    )
+    no-repeat;
+  transform-origin: calc(50% - 150px);
+  animation: moveHorizontal 40s ease infinite;
+  opacity: 0.5;
+}
+
+.g5 {
+  background: radial-gradient(
+      circle at center,
+      rgba(var(--color5), 0.8) 0,
+      rgba(var(--color5), 0) 50%
+    )
+    no-repeat;
+  width: calc(var(--circle-size) * 1.5);
+  height: calc(var(--circle-size) * 1.5);
+  transform-origin: calc(50% - 600px) calc(50% + 150px);
+  animation: moveInCircle 20s ease infinite;
+  opacity: 0.5;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10rem;
+  transition: all 0.02s;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(37, 37, 37);
+  z-index: 0;
+  box-shadow: 0 0px 7px -5px rgba(0, 0, 0, 0.5);
+}
+
+.button:hover {
+  background: rgb(193, 228, 248);
+  color: rgb(33, 0, 85);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+.hoverEffect {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.hoverEffect div {
+  background: rgb(222, 0, 75);
+  background: linear-gradient(
+    90deg,
+    rgba(222, 0, 75, 1) 0%,
+    rgba(191, 70, 255, 1) 49%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border-radius: 40rem;
+  width: 10rem;
+  height: 10rem;
+  transition: 0.4s;
+  filter: blur(20px);
+  animation: effect infinite 3s linear;
+  opacity: 0.5;
+}
+
+.button:hover .hoverEffect div {
+  width: 8rem;
+  height: 8rem;
+}
+
+@keyframes effect {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
